@@ -2,8 +2,9 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @book_new = Book.new
+    @books = Book.all
   end
-  
+
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
@@ -14,20 +15,21 @@ class BooksController < ApplicationController
       render :index
     end
   end
-  
+
   def destroy
   end
 
   def show
+    @book_new = Book.new
   end
 
   def edit
   end
-  
+
   private
-  
+
   def book_params
     params.require(:book).permit(:title, :body)
   end
-  
+
 end
