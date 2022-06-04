@@ -1,21 +1,35 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-3">
-      <%= render 'users/info', user: @user %>
-      <%= render 'form' book_new: @book_new %>
+      <%= render 'users/info', user: @book.user %>
+      <%= render 'form', book_new: @book_new %>
     </div>
     <div class="col-md-8 offset-md-1">
-      <h1>Book detail</h1>
+      <h2>Book detail</h2>
       <table class="table">
         <tr>
           <td>
-            <!-- ユーザ画像とユーザ名、リンクあり -->
+            <!-- ユーザ画像とユーザ名 -->
+            <%= link_to user_path(@book.user) do %>
+            <%= image_tag @book.user.get_profile_image(100, 100) %></br>
+            <%= @book.user.name %>
+            <% end %>
           </td>
           <td>
-            <!-- bookタイトル、リンクあり -->
+            <!-- bookタイトル -->
+            <%= link_to @book.title, book_path(@book) %>
           </td>
           <td>
             <!-- Opinion -->
+            <%= @book.body %>
+          </td>
+          <td>
+            <!-- 編集ボタン -->
+            <%= link_to "Edit", edit_book_path(@book), class: "btn btn-sm btn-success" %>
+          </td>
+          <td>
+            <!-- 削除ボタン-->
+            <%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-sm btn-danger" %>
           </td>
         </tr>
       </table>
